@@ -1,7 +1,6 @@
 from services.search_engine.search_service import SearchService, SearchServiceFactory
 from flask import Flask
 from flask_restful import Api, Resource
-import json
 
 app = Flask(__name__)
 api = Api(app)
@@ -15,14 +14,14 @@ class HandShake(Resource):
             'server_works': True,
             'google_search_works': search_service.checker(),
         }
-        return json.dumps(checkup)
+        return checkup
 
 
 class GoogleSearch(Resource):
     @staticmethod
     def get(query, number_of_sites=10):
         results = search_service.search(query, number_of_sites)
-        return json.dumps(results)
+        return results
 
 
 api.add_resource(HandShake, '/')
