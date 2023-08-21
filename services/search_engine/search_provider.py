@@ -27,22 +27,10 @@ class SearchProvider(ABC):
 
         pass
 
-    @abstractmethod
-    def write_error_into_error_file(self, where_happened: str, query: str, number_of_results: int, type_of_error: str,
+    @staticmethod
+    def write_error_into_error_file(where_happened: str, query: str, number_of_results: int, type_of_error: str,
                                     error_massage: str):
-        """
-        Must ->ADD<- error in ERROR_log.txt in a given way:\n
-        Error thrown in {where_happened}:
-            query: {query}\n
-            number_of_results: {number_of_results}\n
-            Type of error: {type_of_error}\n
-            error_message: {error_massage}\n
-
-        :param str where_happened: where error occur
-        :param str query: what search was made
-        :param int number_of_results: how many results was needed
-        :param str type_of_error: type of error that occurred
-        :param str error_massage: message of an error
-        :return: None
-        """
-        pass
+        with open('ERROR_log.txt', 'a') as error_file:
+            error_file.write(f'\nError thrown in {where_happened}:\nquery: {query}\n'
+                             f'number_of_results: {number_of_results}\nType of error: {type_of_error}\n'
+                             f'error_message: {error_massage}\n')

@@ -26,8 +26,3 @@ class SearchService(SearchProvider):
 
     def search(self, query: str, number_of_results: int) -> list:
         return self.provider.search(query, number_of_results)
-
-    def write_error_into_error_file(self, where_happened: str, query: str, number_of_results: int, type_of_error: str,
-                                    error_massage: str):
-        return self.provider.write_error_into_error_file(where_happened, query, number_of_results, type_of_error,
-                                                         error_massage)

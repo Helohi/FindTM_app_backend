@@ -28,4 +28,4 @@ api.add_resource(HandShake, '/')
 api.add_resource(GoogleSearch, '/google/<string:query>', '/google/<string:query>/<int:number_of_sites>')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)

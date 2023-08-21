@@ -22,17 +22,10 @@ class GoogleSearchPythonProvider(SearchProvider):
     def search(self, query: str, number_of_results: int) -> list:
         responses = []
         try:
-            for response in search(query, num_results=number_of_results, advanced=True):
+            for response in search(query, num_results=number_of_results, advanced=True, sleep_interval=2):
                 responses.append({'url': response.url, 'title': response.title, 'description': response.description})
             return responses
         except Exception as e:
             self.write_error_into_error_file(where_happened='search', query=query, number_of_results=number_of_results,
                                              type_of_error=str(type(e)), error_massage=str(e))
             return self.error_of_search
-
-    def write_error_into_error_file(self, where_happened: str, query: str, number_of_results: int, type_of_error: str,
-                                    error_massage: str):
-        with open('ERROR_log.txt', 'a') as error_file:
-            error_file.write(f'\nError thrown in {where_happened}:\nquery: {query}\n'
-                             f'number_of_results: {number_of_results}\nType of error: {type_of_error}\n'
-                             f'error_message: {error_massage}\n')
