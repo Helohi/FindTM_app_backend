@@ -1,6 +1,7 @@
 from services.search_engine.search_provider import SearchProvider
 from services.search_engine.googlesearch_python_provider import GoogleSearchPythonProvider
 from enum import Enum
+from services.search_engine.duckduckgo_provider import DuckDuckGoSearchProvider
 
 
 class SearchServiceProviderNotProvidedException(Exception):
@@ -9,6 +10,7 @@ class SearchServiceProviderNotProvidedException(Exception):
 
 class SearchServiceFactory(Enum):
     googlesearch_python = 1
+    duckduckgo = 2
 
 
 class SearchService(SearchProvider):
@@ -16,6 +18,8 @@ class SearchService(SearchProvider):
         if provider is None:
             if factory == SearchServiceFactory.googlesearch_python:
                 provider = GoogleSearchPythonProvider()
+            elif factory == SearchServiceFactory.duckduckgo:
+                provider = DuckDuckGoSearchProvider()
             else:
                 raise SearchServiceProviderNotProvidedException('You must provide either provider or factory')
 

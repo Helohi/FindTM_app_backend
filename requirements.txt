@@ -1,2 +1,3 @@
 Flask
 googlesearch-python
+duckduckgo_search
